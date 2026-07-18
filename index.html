@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css">
     
-    <!-- Ícono de la pestaña (Favicon) actualizado -->
+    <!-- Ícono de la pestaña (Favicon) -->
     <link type="image/jpeg" rel="icon" href="https://i.pinimg.com/1200x/80/d7/2b/80d72bd6212643c44227d5885f976952.jpg">
 
     <!-- Tailwind CSS y Configuración de Colores -->
@@ -131,12 +131,16 @@
             btn.innerHTML = '<i class="ri-loader-4-line animate-spin"></i> Enviando...';
             btn.disabled = true;
 
-            const formData = new FormData(contactForm);
+            // Convertir FormData a formato URL-encoded para Google Apps Script
+            const formData = new URLSearchParams(new FormData(contactForm));
             
             fetch(contactForm.action, {
               method: 'POST',
               mode: 'no-cors', // Importante para Google Apps Script
-              body: formData
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: formData.toString()
             })
             .then(() => {
               contactForm.reset();
@@ -165,7 +169,7 @@
         procesos: { title: "Estructuración de Procesos", icon: "ri-settings-3-line", details: ["Mapeo de procesos (compras, ventas, almacén).", "Manuales operativos claros y documentados.", "Protocolos de servicio al cliente estandarizados."], aiGreeting: "El caos del día a día quema tu tiempo y tus ganancias. Si no hay manuales claros, cada tarea se hace diferente. ¿Tus procesos actuales están documentados o están en la cabeza de la gente?" },
         finanzas: { title: "Sanación Financiera", icon: "ri-money-dollar-circle-line", details: ["Recuperación de cuentas por cobrar estancadas.", "Estrategias de cobranza firmes y profesionales.", "Gestión de pagos para evitar descapitalización."], aiGreeting: "Ese es el síntoma más grave: tener ventas pero no dinero en el banco. El dinero en la calle tranca el juego. Hacemos un Diagnóstico de 72 horas: si no encontramos cómo recuperar el doble de lo que cuesta, no nos pagas. ¿Cuánto tienes parado en la calle?" },
         costos: { title: "Costos y Distribución", icon: "ri-scales-3-line", details: ["Ingeniería de costos exacta (materia prima, mermas).", "Estrategia de precios escalonados (detalle/mayor).", "Logística para entrar a puntos de venta físicos."], aiGreeting: "Si fabricas y no conoces tu costo real centavo a centavo, estás perdiendo dinero en cada venta. Estructuramos tus costos y tu distribución. ¿Sabes exactamente cuánto ganas por unidad vendida?" },
-        compras: { title: "Compras y Distribución B2B", icon: "ri-shopping-cart-2-line", details: ["Freno a la compra 'al menudeo': Análisis de consumo anual para comprar lotes directo de fábrica y reducir costos hasta un 50%.", "Creación de Canal Mayorista (B2B): Estructuración para vender excedentes de materia prima a pequeños competidores.", "Negociación Estratégica: Alianzas directas con importadores principales o fábricas de origen.", "Escalabilidad de Negocio: Transformación de simple fabricante a suplidor oficial de su zona."], aiGreeting: "Sé exactamente lo que le pasa a tu negocio: estás vendiendo mucho, pero sientes que no te queda dinero en las manos porque estás comprando mal. Si compras materia prima 'al menudeo' o en 'chines' todas las semanas, le estás regalando tu margen al intermediario.<br><br>En AcTefic implementamos una Ingeniería de Compras y Cadena de Suministro. Entramos a tu negocio, calculamos tu consumo real y te estructuramos para comprar al por mayor directo de importación. Pero no nos quedamos ahí: te organizamos para que uses lo que necesitas a mitad de precio y le vendas el excedente al por mayor a tu competencia, convirtiéndote en el suplidor de tu zona. Pasas de ser un simple fabricante a controlar el mercado. Vamos a analizar tu volumen de compra: agendemos tu Diagnóstico 360° hoy mismo." },
+        compras: { title: "Compras y Distribución B2B", icon: "ri-shopping-cart-2-line", details: ["Freno a la compra 'al menudeo': Análisis de consumo anual para comprar lotes directo de fábrica y reducir costos hasta un 50%.", "Creación de Canal Mayorista (B2B): Estructuración para vender excedentes de materia prima a pequeños competidores.", "Negociación Estratégica: Alianzas directas con importadores principales o fábricas de origen.", "Escalabilidad de Negocio: Transformación de simple fabricante a suplidor oficial de su zona."], aiGreeting: "Sé exactamente lo que le pasa a tu negocio: estás vendiendo mucho, pero sientes que no te queda dinero en las manos porque estás comprando mal. Si compras materia prima 'al menudeo' o en 'chines' todas las semanas, le estás regalando tu margen al intermediario.<br><br>En AcTefic implementamos una Ingeniería de Compras y Cadena de Suministro. Entramos a tu negocio, calculamos tu consumo real y te estructuramos para comprar al por mayor directo de importación. Pero no nos quedamos ahí: te organizamos para que uses lo que necesitas a mitad de precio y le vendas el excedente al por mayor a tu competencia, convirtiéndote en el suplidor de tu zona. Pasas de ser un simple fabricante a controlar el mercado. Vamos a analyze tu volumen de compra: agendemos tu Diagnóstico 360° hoy mismo." },
         comercial: { title: "Estrategia Comercial y Legal", icon: "ri-line-chart-line", details: ["Planes prácticos de captación para nuevos mercados.", "Formalización legal de la empresa (SRL, EIRL).", "Registro de marca para blindar el negocio."], aiGreeting: "Ojo con esto: más clientes sin estructura interna solo significa más caos. No hacemos marketing estético. Integramos tecnología orientada a rentabilidad. ¿Tu proceso actual aguanta el doble de clientes sin colapsar?" },
         digital: { title: "Integración Digital (Plus)", icon: "ri-cpu-line", details: ["Desarrollo de plataformas B2B automatizadas.", "Catálogos interactivos y automatización con IA.", "Herramientas orientadas estrictamente a la rentabilidad 24/7."], aiGreeting: "No hacemos webs cosméticas para dar 'likes'. Implementamos herramientas tecnológicas que automatizan tus ventas 24/7. ¿Estás listo para que la tecnología trabaje por ti?" },
         legal: { title: "Formalización Legal y Corporativa", icon: "ri-government-line", details: ["Registro de Nombre Comercial en ONAPI (defensa de marca).", "Estatutos Sociales (SRL/EIRL) y Registro Mercantil en Cámara de Comercio.", "Inscripción en DGII: Obtención de RNC y habilitación de NCF (ITBIS, ISR).", "Alta como empleador en TSS y SIRLA (Ministerio de Trabajo)."], aiGreeting: "Si estás operando en la informalidad, estás limitando el crecimiento de tu negocio y corriendo un gran peligro. En AcTefic nos encargamos de todo: desde proteger tu nombre en ONAPI, redactar tus Estatutos, gestionar tu RNC en la DGII para que emitas comprobantes, hasta registrar a tu equipo en la TSS para evitarte líos laborales. Te entregamos tu empresa blindada y lista para hacer negocios en grande. ¿Tienes tu empresa formalizada o estás operando en la informalidad?" },
@@ -510,7 +514,6 @@
         <!-- HERO SECTION -->
         <section id="inicio" class="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
           <div class="absolute inset-0">
-            <!-- Fondo actualizado -->
             <img alt="ActEfic Consultores background" class="w-full h-full object-cover" src="https://i.pinimg.com/1200x/ed/90/54/ed90542f46cf7ab14b2ffb0bd7c4a3c6.jpg">
             <div class="absolute inset-0 bg-primary-900/80"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-primary-950/40 via-transparent to-primary-950/60"></div>
@@ -737,7 +740,8 @@
               <div class="grid lg:grid-cols-5 gap-12">
                 <div class="lg:col-span-3">
                   <div class="bg-background-100 rounded-xl p-8 md:p-10 border border-background-200/70">
-                    <form id="contact-form" action="https://script.google.com/macros/s/AKfycbzbxxxYi8jpwgLtSrc7j9m4EmPfWWX6HGLAGK7tX6lzHdT1s3FTubFeGMlXQIk5QXGd/exec" method="POST" class="space-y-5">
+                    <!-- Action actualizado con tu nuevo enlace de Apps Script -->
+                    <form id="contact-form" action="https://script.google.com/macros/s/AKfycbxZcM1AxeYBGjqxYJo5PjC5MJINZPgiaHl36psXHc7BkTiScc0clNoA2r2_YKesctUu/exec" method="POST" class="space-y-5">
                       <div class="grid sm:grid-cols-2 gap-5">
                         <div>
                           <label class="block text-sm font-medium text-foreground-700 mb-1.5">Nombre completo <span class="text-accent-500">*</span></label>
