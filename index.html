@@ -117,7 +117,7 @@ function changeLanguage(lang) {
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
-// --- VIEW SWITCHER (LOCAL / GLOBAL) --- 
+// --- VIEW SWITCHER (LOCAL / GLOBAL) ---
 function showGlobalView() {
   document.getElementById('view-local').classList.add('hidden');
   document.getElementById('view-global').classList.remove('hidden');
@@ -144,23 +144,14 @@ function scrollToSobreMi() {
 
 function toggleMenu() { document.getElementById('menu-movil').classList.toggle('hidden'); }
 
-// --- EXPERIENCE MODAL (LOCAL & GLOBAL) ---
 function openExperience() {
-  let isGlobal = !document.getElementById('view-global').classList.contains('hidden');
-  if(isGlobal) {
-    document.getElementById('experience-modal-global').classList.remove('hidden');
-    document.getElementById('experience-content-global').scrollTop = 0;
-    document.getElementById('exp-close-btn-global').classList.add('opacity-0','pointer-events-none');
-  } else {
-    document.getElementById('experience-modal-local').classList.remove('hidden');
-    document.getElementById('experience-content-local').scrollTop = 0;
-    document.getElementById('exp-close-btn-local').classList.add('opacity-0','pointer-events-none');
-  }
+  document.getElementById('experience-modal').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
+  document.getElementById('experience-content').scrollTop = 0;
+  document.getElementById('exp-close-btn').classList.add('opacity-0','pointer-events-none');
 }
 function closeExperience() {
-  document.getElementById('experience-modal-local').classList.add('hidden');
-  document.getElementById('experience-modal-global').classList.add('hidden');
+  document.getElementById('experience-modal').classList.add('hidden');
   document.body.style.overflow = 'auto';
 }
 
@@ -191,26 +182,19 @@ function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const expContentLocal = document.getElementById('experience-content-local');
-  const expContentGlobal = document.getElementById('experience-content-global');
-
-  function setupExpObserver(expContent, progressBarId, closeBtnId) {
-    if(expContent) {
-      expContent.addEventListener('scroll', function() {
-        let progress = (expContent.scrollTop / (expContent.scrollHeight - expContent.clientHeight)) * 100;
-        document.getElementById(progressBarId).style.width = progress + '%';
-        if (progress > 85) document.getElementById(closeBtnId).classList.remove('opacity-0','pointer-events-none');
-        else document.getElementById(closeBtnId).classList.add('opacity-0','pointer-events-none');
-      });
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
-      }, { root: expContent, threshold: 0.3 });
-      expContent.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    }
+  const expContent = document.getElementById('experience-content');
+  if(expContent) {
+    expContent.addEventListener('scroll', function() {
+      let progress = (expContent.scrollTop / (expContent.scrollHeight - expContent.clientHeight)) * 100;
+      document.getElementById('exp-progress-bar').style.width = progress + '%';
+      if (progress > 85) document.getElementById('exp-close-btn').classList.remove('opacity-0','pointer-events-none');
+      else document.getElementById('exp-close-btn').classList.add('opacity-0','pointer-events-none');
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+    }, { root: expContent, threshold: 0.3 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
-
-  setupExpObserver(expContentLocal, 'exp-progress-bar-local', 'exp-close-btn-local');
-  setupExpObserver(expContentGlobal, 'exp-progress-bar-global', 'exp-close-btn-global');
   
   for (const key in sectorsData) {
     const option = document.createElement('option');
@@ -585,6 +569,59 @@ document.addEventListener('mouseleave', function(e) {
 });
 function closeExitPopup() { document.getElementById('exit-popup').classList.add('hidden'); }
 </script>
+</head>
+<body>
+<div id="google_translate_element" class="hidden"></div>
+<div id="root">
+  <main class="bg-background-50 text-foreground-900 min-h-screen font-body">
+    
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background-50/95 backdrop-blur-md border-b border-background-200/70 shadow-none">
+      <div class="w-full px-6 md:px-10 lg:px-16">
+        <nav class="flex items-center justify-between h-20 relative">
+          <a href="#inicio" class="flex flex-col leading-tight">
+            <span class="text-2xl md:text-3xl font-extrabold tracking-tight font-heading notranslate" translate="no">
+              <span class="text-accent-500">A</span><span class="text-primary-500">c</span><span class="text-primary-500">t</span><span class="text-accent-500">E</span><span class="text-primary-500">f</span><span class="text-primary-500">i</span><span class="text-primary-500">c</span>
+            </span>
+            <span class="text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase text-foreground-700 notranslate" translate="no">Operative Consulting, Sourcing & Tech</span>
+          </a>
+          <div class="hidden md:flex items-center gap-8">
+            <button onclick="showLocalView(); window.location.hash='#inicio';" class="text-sm font-medium text-foreground-700 hover:text-primary-500 transition-colors whitespace-nowrap">Local RD</button>
+            <button onclick="showGlobalView(); window.location.hash='#global-inicio';" class="text-sm font-bold text-accent-600 hover:text-accent-700 transition-colors whitespace-nowrap flex items-center gap-1">
+              <i class="ri-global-line"></i> Global Services
+            </button>
+            <button onclick="scrollToSobreMi()" class="text-sm font-medium text-foreground-700 hover:text-primary-500 transition-colors whitespace-nowrap">Sobre Mí</button>
+            <a href="#contacto" class="text-sm font-medium text-foreground-700 hover:text-primary-500 transition-colors whitespace-nowrap">Contacto</a>
+            <div class="flex items-center gap-1 border-r border-background-200 pr-4 mr-2">
+              <button onclick="changeLanguage('es')" class="px-2 py-1 text-xs font-bold rounded text-foreground-600 hover:bg-background-200 transition-colors">ES</button>
+              <button onclick="changeLanguage('en')" class="px-2 py-1 text-xs font-bold rounded text-foreground-600 hover:bg-background-200 transition-colors">EN</button>
+              <button onclick="changeLanguage('zh-CN')" class="px-2 py-1 text-xs font-bold rounded text-foreground-600 hover:bg-background-200 transition-colors">中文</button>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=18094328712&text=mas%20informaci%C3%B6n%20(ACTEFIC)%20" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors whitespace-nowrap">
+              <i class="ri-whatsapp-line"></i>Hablemos
+            </a>
+          </div>
+          <button onclick="toggleMenu()" class="md:hidden w-10 h-10 flex items-center justify-center text-foreground-800" aria-label="Menú">
+            <i class="ri-menu-line text-2xl"></i>
+          </button>
+        </nav>
+        <div id="menu-movil" class="hidden md:hidden absolute top-20 left-0 right-0 bg-background-50 border-b border-background-200/70 flex-col items-center gap-4 py-6 shadow-lg">
+          <button onclick="toggleMenu(); showLocalView(); window.location.hash='#inicio';" class="text-sm font-medium text-foreground-700 hover:text-primary-500">Local RD Services</button>
+          <button onclick="toggleMenu(); showGlobalView(); window.location.hash='#global-inicio';" class="text-sm font-bold text-accent-600 hover:text-accent-700">Global Services</button>
+          <button onclick="toggleMenu(); scrollToSobreMi();" class="text-sm font-medium text-foreground-700 hover:text-primary-500">Sobre Mí</button>
+          <a href="#contacto" onclick="toggleMenu()" class="text-sm font-medium text-foreground-700 hover:text-primary-500">Contacto</a>
+          <div class="flex items-center gap-2 mt-4">
+            <button onclick="changeLanguage('es')" class="px-3 py-1.5 text-xs font-bold rounded bg-background-200 text-foreground-700">ES</button>
+            <button onclick="changeLanguage('en')" class="px-3 py-1.5 text-xs font-bold rounded bg-background-200 text-foreground-700">EN</button>
+            <button onclick="changeLanguage('zh-CN')" class="px-3 py-1.5 text-xs font-bold rounded bg-background-200 text-foreground-700">中文</button>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=18094328712&text=mas%20informaci%C3%B6n%20(ACTEFIC)%20" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors">
+            <i class="ri-whatsapp-line"></i>Hablemos
+          </a>
+        </div>
+      </div>
+    </header>
+
     <!-- ========================================== -->
     <!-- VISTA LOCAL (PIEDRA ANGULAR RD) -->
     <!-- ========================================== -->
@@ -1180,7 +1217,7 @@ function closeExitPopup() { document.getElementById('exit-popup').classList.add(
     </div>
 
     <!-- EXPERIENCIA INMERSIVA (FACTOR ACTEFIC) -->
-    <div "id="experience-modal-local" class="hidden fixed inset-0 z-[200] bg-background-50 text-foreground-900 overflow-hidden">
+    <div id="experience-modal" class="hidden fixed inset-0 z-[200] bg-background-50 text-foreground-900 overflow-hidden">
       <div class="absolute top-0 left-0 right-0 h-1 bg-background-200 z-50">
         <div id="exp-progress-bar" class="h-full bg-accent-500 transition-all duration-150" style="width: 0%"></div>
       </div>
@@ -1261,95 +1298,7 @@ function closeExitPopup() { document.getElementById('exit-popup').classList.add(
         </div>
       </div>
     </div>
-    <!-- EXPERIENCIA INMERSIVA (FACTOR ACTEFIC) - GLOBAL -->
-    <div id="experience-modal-global" class="hidden fixed inset-0 z-[200] bg-background-50 text-foreground-900 overflow-hidden">
-      <div class="absolute top-0 left-0 right-0 h-1 bg-background-200 z-50">
-        <div id="exp-progress-bar-global" class="h-full bg-accent-500 transition-all duration-150" style="width: 0%"></div>
-      </div>
-      <button id="exp-close-btn-global" onclick="closeExperience()" class="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-background-200 text-foreground-600 hover:bg-accent-500 hover:text-background-50 transition-all duration-500 opacity-0 pointer-events-none">
-        <i class="ri-close-line text-2xl"></i>
-      </button>
-      <div id="experience-content-global" class="exp-scroll h-screen w-full overflow-y-auto snap-y snap-mandatory">
-        
-        <div class="snap-screen h-screen w-full flex items-center justify-center p-6 md:p-10 relative bg-background-50">
-          <div class="max-w-4xl text-center">
-            <span class="reveal inline-block text-sm font-semibold text-accent-500 uppercase tracking-[0.15em] mb-4">The <span class="notranslate" translate="no">AcTefic</span> Factor</span>
-            <h2 class="reveal text-4xl md:text-6xl font-bold mb-8 font-heading text-foreground-950">The difference between <span class="text-primary-500">advising from afar</span> and <span class="text-accent-500">executing on the ground</span>.</h2>
-            <p class="reveal text-2xl md:text-3xl font-heading text-foreground-700 italic mb-12">"A PDF report from 1,000 miles away won't save your supply chain."</p>
-            <div class="reveal animate-bounce flex flex-col items-center gap-2 text-foreground-400">
-              <span class="text-xs uppercase tracking-widest">Scroll to discover</span>
-              <i class="ri-arrow-down-double-line text-3xl"></i>
-            </div>
-          </div>
-        </div>
 
-        <div class="snap-screen h-screen w-full flex items-center justify-center p-6 md:p-10 bg-background-100 border-t border-background-200">
-          <div class="max-w-4xl text-center">
-            <div class="reveal w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-background-200 text-foreground-500 mb-8"><i class="ri-file-text-line text-4xl"></i></div>
-            <h3 class="reveal text-3xl md:text-5xl font-bold text-foreground-950 mb-6 font-heading">Remote Advisors</h3>
-            <p class="reveal text-xl md:text-2xl text-foreground-700 leading-relaxed mb-4"><span class="text-accent-500 font-bold">The PDF Factory:</span> They charge you high fees to tell you what's wrong from a desk in Miami or New York.</p>
-            <p class="reveal text-lg text-foreground-500 leading-relaxed max-w-2xl mx-auto">They point out the problems in your Dominican operation, but when you ask "Who will fix it physically?", they say: "That's your team's job." You are left with the same chaos, but with less budget.</p>
-          </div>
-        </div>
-
-        <div class="snap-screen h-screen w-full flex items-center justify-center p-6 md:p-10 bg-background-50">
-          <div class="max-w-4xl text-center">
-            <div class="reveal w-20 h-20 mx-auto flex items-center justify-center rounded-full bg-background-200 text-foreground-500 mb-8"><i class="ri-directory-line text-4xl"></i></div>
-            <h3 class="reveal text-3xl md:text-5xl font-bold text-foreground-950 mb-6 font-heading">Directories & Middlemen</h3>
-            <p class="reveal text-xl md:text-2xl text-foreground-700 leading-relaxed mb-4"><span class="text-accent-500 font-bold">The Opaque List:</span> They give you a directory of "verified" suppliers, but you still have to fly down to check if they are real.</p>
-            <p class="reveal text-lg text-foreground-500 leading-relaxed max-w-2xl mx-auto">You end up paying the "foreigner markup", receiving defective textiles or unverified tobacco, and wasting thousands on executive trips that could have been avoided.</p>
-          </div>
-        </div>
-
-        <div class="snap-screen h-screen w-full flex items-center justify-center p-6 md:p-10 bg-primary-50">
-          <div class="max-w-4xl text-center">
-            <div class="reveal w-24 h-24 mx-auto flex items-center justify-center rounded-full bg-accent-500 text-background-50 mb-8 shadow-xl shadow-accent-500/30"><i class="ri-rocket-2-line text-5xl"></i></div>
-            <h3 class="reveal text-4xl md:text-6xl font-bold text-foreground-950 mb-6 font-heading"><span class="notranslate" translate="no">AcTefic</span>: Your Boots on the Ground</h3>
-            <p class="reveal text-xl md:text-2xl text-foreground-700 leading-relaxed">We are not remote advisors or passive directories; we are <strong class="text-accent-500">your operational arm in DR with digital command centers</strong>.</p>
-          </div>
-        </div>
-
-        <div class="snap-screen min-h-screen w-full flex items-center justify-center p-6 md:p-10 py-20 bg-background-100">
-          <div class="max-w-6xl w-full">
-            <h3 class="reveal text-3xl md:text-5xl font-bold text-center text-foreground-950 mb-12 font-heading">Why We Are Your Only Real Option</h3>
-            <div class="grid md:grid-cols-3 gap-8">
-              <div class="reveal bg-background-50 p-8 rounded-xl border border-background-200 shadow-sm text-center">
-                <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6"><i class="ri-map-pin-line text-3xl"></i></div>
-                <h4 class="text-xl font-bold text-foreground-950 mb-3 font-heading">Physical Verification</h4>
-                <p class="text-foreground-600 text-sm leading-relaxed">We walk the factory floor. We check humidity in cocoa, inspect cigar rolling, and verify ISO compliance before dispatch.</p>
-              </div>
-              <div class="reveal bg-background-50 p-8 rounded-xl border border-background-200 shadow-sm text-center">
-                <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6"><i class="ri-hand-coin-line text-3xl"></i></div>
-                <h4 class="text-xl font-bold text-foreground-950 mb-3 font-heading">Transparent Sourcing</h4>
-                <p class="text-foreground-600 text-sm leading-relaxed">We negotiate local prices, eliminating the foreigner markup. We sign off on quality before you pay a single cent.</p>
-              </div>
-              <div class="reveal bg-background-50 p-8 rounded-xl border border-background-200 shadow-sm text-center">
-                <div class="w-16 h-16 mx-auto flex items-center justify-center rounded-xl bg-primary-100 text-primary-600 mb-6"><i class="ri-flow-chart text-3xl"></i></div>
-                <h4 class="text-xl font-bold text-foreground-950 mb-3 font-heading">Remote Command</h4>
-                <p class="text-foreground-600 text-sm leading-relaxed">We structure your Dominican team with KPIs and daily reporting via Notion/ClickUp, so you don't have to fly down to know what's happening.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="snap-screen h-screen w-full flex items-center justify-center p-6 md:p-10 bg-accent-50">
-          <div class="max-w-3xl text-center">
-            <i class="reveal ri-shield-check-line text-6xl text-accent-500 mb-8"></i>
-            <h3 class="reveal text-3xl md:text-5xl font-bold text-foreground-950 mb-6 font-heading">You now know the <span class="notranslate" translate="no">AcTefic</span> Factor.</h3>
-            <p class="reveal text-xl text-foreground-700 mb-10 leading-relaxed">No more surprise travel costs. No more opaque suppliers. We secure your Dominican operation. Are you ready to scale globally?</p>
-            <div class="reveal flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://api.whatsapp.com/send?phone=18094328712&text=Hello%20AcTefic%2C%20I%20am%20interested%20in%20your%20Global%20Services%20%28Sourcing%2C%20Auditing%20or%20Remote%20Consulting%29." target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md text-base font-bold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors whitespace-nowrap shadow-lg">
-                <i class="ri-whatsapp-line"></i>Yes, I want to scale securely
-              </a>
-              <button onclick="closeExperience()" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md text-base font-semibold border-2 border-foreground-200 text-foreground-700 hover:bg-foreground-900 hover:text-background-50 transition-colors whitespace-nowrap">
-                Back to website
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
     <!-- CHATBOT GLOBAL -->
     <div id="ai-chat-widget" class="hidden fixed bottom-24 left-6 z-50 w-[90vw] max-w-sm bg-background-50 rounded-xl shadow-2xl border border-background-200 flex flex-col overflow-hidden" style="height: 600px; max-height: calc(100vh - 120px);">
       <div class="bg-primary-800 text-background-50 p-4 flex items-center justify-between flex-shrink-0">
