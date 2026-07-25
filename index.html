@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO METADATOS -->
-    <title>Especialistas en Consultoría Operativa, Distribución e Integración Digital | AcTefic</title>
-    <meta name="description" content="Especialistas en consultoría operativa, optimización de canales de distribución, sourcing para extranjeros e integración digital en Santo Domingo y todo el Cibao.">
-    <meta name="keywords" content="consultoria operativa rd, canales de distribucion santo domingo, sourcing republica dominicana, representacion comercial rd, integracion digital cibao, actefic, joan cuevas">
+    <title>Auditoría Operativa, Sourcing y Conexión con Suplidores en RD | AcTefic</title>
+    <meta name="description" content="Conectamos compradores extranjeros con suplidores reales en RD. Auditoría operativa, sourcing de cigarros, tabaco, agroindustria y zonas francas. Tu brazo operativo local.">
+    <meta name="keywords" content="sourcing republica dominicana, suplidores tabaco rd, cigarros premium santiago, auditoria operativa rd, zonas francas manufactura, representacion comercial rd, actefic, joan cuevas">
     <meta name="author" content="AcTefic Consultores">
 
     <meta name="geo.region" content="DO" />
@@ -52,13 +52,13 @@
         {"@type": "AdministrativeArea", "name": "San Francisco de Macorís"},
         {"@type": "AdministrativeArea", "name": "Cibao"}
       ],
-      "description": "Especialistas en consultoría operativa, canales de distribución, sourcing para extranjeros e integración digital en República Dominicana."
+      "description": "Conectamos compradores extranjeros con suplidores reales. Sourcing, Auditoría Operativa y Representación Comercial para multinacionales en República Dominicana."
     }
     </script>
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="AcTefic | Especialistas en Consultoría Operativa e Integración Digital">
-    <meta property="og:description" content="Optimizamos tu operación, multiplicamos tu productividad. Consultoría + tecnología para tu negocio.">
+    <meta property="og:title" content="AcTefic | Sourcing, Conexión de Suplidores e Integración Digital">
+    <meta property="og:description" content="Tu brazo operativo en RD. Conectamos compradores con suplidores de tabaco, agroindustria y manufactura.">
     <meta property="og:locale" content="es_DO">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,7 +106,6 @@
       .carousel-slide { display: none; opacity: 0; transition: opacity 0.5s ease-in-out; }
       .carousel-slide.active { display: flex; opacity: 1; }
 
-      /* Ocultar la barra de traducción de Google */
       .goog-te-banner-frame.skiptranslate {display: none !important;}
       .goog-te-gadget {display: none !important;}
       .goog-logo-link {display: none !important;}
@@ -114,7 +113,7 @@
       .goog-tooltip:hover {display: none !important;}
     </style>
 
-    <!-- Script de Google Translate con Cookies -->
+    <!-- Script de Google Translate -->
     <script type="text/javascript">
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({
@@ -126,20 +125,14 @@
       }
 
       function changeLanguage(lang) {
-        // Verificar el idioma actual en las cookies
         var match = document.cookie.match(/googtrans=\/es\/(.*?)(;|$)/);
         var currentLang = match ? match[1] : 'es';
-        
-        if (currentLang === lang) return; // Si es el mismo, no hacer nada
-
-        // Borrar cookie si es español, si no, crearla
+        if (currentLang === lang) return;
         if (lang === 'es') {
             document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
         } else {
             document.cookie = 'googtrans=/es/' + lang + '; path=/';
         }
-        
-        // Recargar la página para forzar la traducción
         window.location.reload();
       }
     </script>
@@ -246,7 +239,11 @@
       });
 
       const servicesData = {
-        sourcing: { title: "Sourcing & Representación Comercial", icon: "ri-shake-hands-line", aiGreeting: "Ayudamos a compradores e inversionistas extranjeros a conectar de forma segura con fábricas y mayoristas locales. Actuamos como tu brazo operativo: auditar instalaciones, negociar precios reales y garantizar calidad. ¿Buscas productos o fábricas en el país?" },
+        sourcing: { 
+          title: "Sourcing & Conexión con Suplidores", 
+          icon: "ri-shake-hands-line", 
+          aiGreeting: "Conectamos compradores e inversionistas extranjeros con suplidores reales y fábricas en RD. Actuamos como tu brazo operativo: auditamos instalaciones, negociamos precios y garantizamos calidad en tabaco, agroindustria y manufactura. ¿Buscas suplidores en el país?" 
+        },
         emprendedores: { title: "Emprendedores e Ideas (Fase Cero)", icon: "ri-rocket-2-line", details: ["Validación Financiera: Cálculo de costos proyectados y precios antes de invertir un solo peso.", "Blindaje Legal: ONAPI, Estatutos (SRL/EIRL), RNC en DGII y perfil impositivo inteligente.", "Arquitectura del Negocio: Organigrama inicial, roles clave y procesos básicos documentados.", "Lanzamiento Digital Interactivo: Página web con IA para captar clientes 24/7 desde el día 1."], aiGreeting: "Tener una gran idea es solo el 10% del éxito; el otro 90% es la estructura. En AcTefic no te damos palmaditas en la espalda; nos sentamos contigo a formalizar tu negocio en ONAPI y DGII, calculamos tus costos reales para garantizar que vas a ganar dinero y te armamos la estrategia comercial y digital para lanzar con fuerza. No lances a ciegas ni arriesgues tus ahorros. ¿Tienes tu idea clara pero no sabes cómo estructurarla?" },
         rrhh: { title: "Gestión del Talento Humano", icon: "ri-team-line", details: ["Evaluación de productividad del equipo actual.", "Estructuración de nuevos roles y eliminación de duplicidades.", "Capacitación operativa alineada al crecimiento."], aiGreeting: "El problema no es el empleado, es la estructura. Si el negocio se cae a pedazos cuando tú no estás, no tienes una empresa, tienes un empleo disfrazado. ¿Sientes que el negocio se detiene si te vas de vacaciones?" },
         procesos: { title: "Estructuración de Procesos", icon: "ri-settings-3-line", details: ["Mapeo de procesos (compras, ventas, almacén).", "Manuales operativos claros y documentados.", "Protocolos de servicio al cliente estandarizados."], aiGreeting: "El caos del día a día quema tu tiempo y tus ganancias. Si no hay manuales claros, cada tarea se hace diferente. ¿Tus procesos actuales están documentados o están en la cabeza de la gente?" },
@@ -301,7 +298,8 @@
         agencias_marketing: { name: "38. Agencias de Marketing y Desarrollo de Software", types: ["legal", "procesos", "finanzas"] },
         daycare: { name: "39. Centros de Cuidado Infantil (Daycare) y Campamentos", types: ["procesos", "legal", "rrhh"] },
         gimnasios: { name: "40. Gimnasios y Centros de Fitness", types: ["finanzas", "rrhh", "comercial"] },
-        seguridad: { name: "41. Empresas de Seguridad Privada y Vigilancia", types: ["rrhh", "legal", "procesos"] }
+        seguridad: { name: "41. Empresas de Seguridad Privada y Vigilancia", types: ["rrhh", "legal", "procesos"] },
+        tabacalera: { name: "42. Industria Tabacalera y Cigarros", types: ["sourcing", "procesos", "legal"] }
       };
 
       const waLink = "https://api.whatsapp.com/send?phone=18094328712&text=mas%20informaci%C3%B3n%20(ACTEFIC)%20";
@@ -464,8 +462,8 @@
 
         const btnSourcing = document.createElement('button');
         btnSourcing.className = 'mt-2 px-3 py-1.5 bg-primary-50 hover:bg-primary-100 text-primary-700 text-xs font-medium rounded-full border border-primary-200 transition-colors w-full text-center';
-        btnSourcing.innerText = "Soy extranjero y quiero comprar/invertir en RD";
-        btnSourcing.onclick = () => { addUserMessage("Soy extranjero y quiero comprar/invertir en RD"); container.innerHTML = ''; talkSourcing(); };
+        btnSourcing.innerText = "Soy extranjero / Multinacional y opero en RD";
+        btnSourcing.onclick = () => { addUserMessage("Soy extranjero / Multinacional y opero en RD"); container.innerHTML = ''; talkSourcing(); };
         container.appendChild(btnSourcing);
 
         const btnWhy = document.createElement('button');
@@ -476,7 +474,7 @@
       }
 
       function talkSourcing() {
-        addBotMessage("Ayudamos a compradores e inversionistas extranjeros a conectar de forma segura con fábricas, productores y mayoristas locales. No somos un simple directorio de contactos: actuamos como tu brazo operativo local para auditar instalaciones, negociar precios reales y garantizar la calidad de cada pedido antes del despacho.<br><br>Para analizar tu proyecto de compras o conexión con productores locales, por favor compártenos tu nombre, correo corporativo y el tipo de producto o sector que buscas. Un consultor de ActEfic te contactará a la brevedad.", true);
+        addBotMessage("Si tienes ejecutivos en el extranjero y operaciones en RD, somos tus ojos en el terreno. Conectamos compradores internacionales con suplidores reales de tabaco, cigarros, agroindustria y manufactura.<br><br>Ahorra miles de dólares en viajes y evita sorpresas en tu cadena de suministro. Auditamos plantas, controlamos calidad y negociamos precios locales.<br><br>Para analizar tu proyecto de conexión con suplidores, compártenos tu nombre, correo corporativo y el sector. Un consultor te contactará a la brevedad.", true);
         setOptions([{ text: "Hablar con un Consultor", next: () => window.open(waLink, '_blank') }]);
       }
 
@@ -566,7 +564,7 @@
                 <span class="text-2xl md:text-3xl font-extrabold tracking-tight font-heading">
                   <span class="text-accent-500">A</span><span class="text-primary-500">c</span><span class="text-primary-500">t</span><span class="text-accent-500">E</span><span class="text-primary-500">f</span><span class="text-primary-500">i</span><span class="text-primary-500">c</span>
                 </span>
-                <span class="text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase text-foreground-700">Especialistas en Consultoría Operativa</span>
+                <span class="text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase text-foreground-700">Sourcing, Auditoría Operativa e Integración Digital</span>
               </a>
               <div class="hidden md:flex items-center gap-8">
                 <a href="#inicio" class="text-sm font-medium text-foreground-700 hover:text-primary-500 transition-colors whitespace-nowrap">Inicio</a>
@@ -621,7 +619,7 @@
             <div class="max-w-4xl mx-auto text-center">
               <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-500/20 border border-accent-400/30 mb-8">
                 <span class="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span>
-                <span class="text-sm font-medium text-accent-100">Especialistas en Consultoría Operativa · Distribución · Integración Digital</span>
+                <span class="text-sm font-medium text-accent-100">Sourcing · Auditoría Operativa · Integración Digital</span>
               </div>
               <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-background-50 leading-tight mb-6 font-heading">Optimizamos tu <span class="text-accent-400">operación</span>,<br class="hidden sm:block"> multiplicamos tu <span class="text-accent-400">productividad</span>.</h1>
               <p class="text-lg md:text-xl text-background-200 max-w-2xl mx-auto mb-10 leading-relaxed">En ActEfic Consultores unimos estrategia de negocio con ejecución tecnológica real. Selecciona tu sector y te guiaremos a la solución exacta.</p>
@@ -665,13 +663,14 @@
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               
+              <!-- TARJETA SOURCING: CONEXIÓN CON SUPLIDORES -->
               <div data-service-card="sourcing" class="group relative p-8 md:p-10 rounded-xl border-2 transition-all bg-accent-50 border-accent-300 hover:border-accent-500 flex flex-col md:col-span-2 lg:col-span-3 shadow-lg">
                 <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
-                  <div class="w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-xl bg-accent-500 text-background-50 shadow-md"><i class="ri-shake-hands-line text-3xl"></i></div>
+                  <div class="w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-xl bg-accent-500 text-background-50 shadow-md"><i class="ri-links-line text-3xl"></i></div>
                   <div class="flex-1 text-center md:text-left">
-                    <span class="inline-block text-[10px] font-bold px-2 py-1 rounded-full bg-accent-500 text-background-50 uppercase tracking-wider mb-2">Para Extranjeros e Inversionistas</span>
-                    <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 font-heading leading-tight mb-2">Sourcing & Representación Comercial Local</h3>
-                    <p class="text-foreground-700 leading-relaxed text-sm md:text-base mb-4">Tus ojos, oídos y equipo de negociación presencial en el país. Auditar instalaciones, negociar precios reales y garantizar calidad.</p>
+                    <span class="inline-block text-[10px] font-bold px-2 py-1 rounded-full bg-accent-500 text-background-50 uppercase tracking-wider mb-2">Para Multinacionales y Compradores</span>
+                    <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 font-heading leading-tight mb-2">Sourcing & Conexión con Suplidores Locales</h3>
+                    <p class="text-foreground-700 leading-relaxed text-sm md:text-base mb-4">Conectamos compradores extranjeros con suplidores reales en RD. Tu brazo operativo local: auditamos plantas, tabacaleras, agroindustria y negociamos precios de mercado. Ahorra miles en viajes.</p>
                     <button onclick="openSourcingCarousel()" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-md text-sm font-bold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors">
                       Ver Cómo Funciona <i class="ri-arrow-right-line"></i>
                     </button>
@@ -803,7 +802,7 @@
                     <div>
                         <span class="inline-block text-sm font-semibold text-accent-400 uppercase tracking-[0.15em] mb-3">Asesor IA ActEfic</span>
                         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 font-heading">Tu consultor interactivo <span class="text-accent-400">24/7</span></h2>
-                        <p class="text-lg text-background-300 leading-relaxed mb-8">Hemos integrado un <strong>Asesor con Inteligencia Artificial</strong> que conoce exactamente el dolor de 41 sectores de República Dominicana. Selecciona tu industria y te dirá cómo resolver esos problemas específicos.</p>
+                        <p class="text-lg text-background-300 leading-relaxed mb-8">Hemos integrado un <strong>Asesor con Inteligencia Artificial</strong> que conoce exactamente el dolor de 42 sectores de República Dominicana. Selecciona tu industria y te dirá cómo resolver esos problemas específicos.</p>
                         <button onclick="toggleChat()" class="inline-flex items-center gap-3 px-8 py-4 rounded-md text-base font-bold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors whitespace-nowrap shadow-lg">
                             <i class="ri-robot-2-line text-xl"></i>Iniciar Consultoría con IA
                         </button>
@@ -828,7 +827,7 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN SOBRE MÍ (JOAN CUEVAS) -->
+        <!-- SECCIÓN SOBRE MÍ (JOAN CUEVAS) -->
         <section id="sobre-mi" class="py-20 md:py-28 bg-background-100 text-foreground-900 relative overflow-hidden">
             <div class="w-full px-6 md:px-10 lg:px-16 relative z-10 max-w-6xl mx-auto">
                 <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
@@ -870,7 +869,7 @@
                                 <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-100 text-primary-600 flex-shrink-0"><i class="ri-file-list-3-line text-xl"></i></div>
                                 <div>
                                     <h4 class="font-bold text-foreground-900 text-sm mb-1">Manuales Prácticos</h4>
-                                    <p class="text-xs text-foreground-600">Documentación clara que el personal realmente entiende y usa día a día.</p>
+                                    <p class="text-xs text-foreground-600">Documentación clara que el personal realmente entiende y uses día a día.</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
@@ -976,9 +975,9 @@
                     <span class="text-2xl font-extrabold tracking-tight text-background-50 font-heading">
                       <span class="text-accent-400">A</span><span class="text-background-50">c</span><span class="text-background-50">t</span><span class="text-accent-400">E</span><span class="text-background-50">f</span><span class="text-background-50">i</span><span class="text-background-50">c</span>
                     </span>
-                    <span class="text-xs font-semibold tracking-[0.15em] uppercase text-accent-400">Especialistas en Consultoría Operativa</span>
+                    <span class="text-xs font-semibold tracking-[0.15em] uppercase text-accent-400">Sourcing & Auditoría Operativa</span>
                   </div>
-                  <p class="text-sm text-background-400 leading-relaxed">Especialistas en Consultoría Operativa, Canales de Distribución e Integración Digital. Optimizamos tu operación, multiplicamos tu productividad.</p>
+                  <p class="text-sm text-background-400 leading-relaxed">Conectamos compradores con suplidores en RD. Brazo operativo para multinacionales. Ahorra costos de viaje y asegura tu calidad.</p>
                 </div>
                 <div>
                   <h4 class="text-sm font-bold text-background-50 uppercase tracking-wider mb-4">Navegación</h4>
@@ -993,7 +992,7 @@
                 <div>
                   <h4 class="text-sm font-bold text-background-50 uppercase tracking-wider mb-4">Servicios</h4>
                   <ul class="space-y-2.5">
-                    <li class="text-sm text-background-400">Sourcing & Representación</li>
+                    <li class="text-sm text-background-400">Conexión con Suplidores (Sourcing)</li>
                     <li class="text-sm text-background-400">Emprendedores (Fase Cero)</li>
                     <li class="text-sm text-background-400">Formalización Legal (ONAPI/DGII)</li>
                     <li class="text-sm text-background-400">Estructuración de Procesos</li>
@@ -1015,7 +1014,7 @@
               </div>
               <div class="pt-8 border-t border-background-50/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p class="text-sm text-background-500">© 2024 ActEfic Consultores. Todos los derechos reservados.</p>
-                <p class="text-sm text-background-500">Consultoría Operativa · Distribución · Integración Digital</p>
+                <p class="text-sm text-background-500">Sourcing · Auditoría · Integración Digital</p>
               </div>
             </div>
           </div>
@@ -1061,7 +1060,7 @@
             </div>
         </div>
 
-        <!-- VENTANA MODAL CARRUSEL SOURCING -->
+        <!-- VENTANA MODAL CARRUSEL SOURCING / CONEXIÓN CON SUPLIDORES -->
         <div id="sourcing-modal" class="hidden fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 backdrop-blur-md">
             <div class="bg-background-50 rounded-2xl shadow-2xl max-w-3xl w-full p-8 md:p-12 relative overflow-hidden text-center">
                 <button onclick="closeSourcingCarousel()" class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-background-200/80 text-foreground-700 hover:bg-accent-500 hover:text-background-50 transition-colors">
@@ -1070,29 +1069,34 @@
                 
                 <div id="sourcing-carousel" class="min-h-[300px] flex flex-col items-center justify-center">
                     <div class="carousel-slide active flex-col items-center justify-center">
-                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-file-search-line text-4xl"></i></div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Paso 1: Solicitud y Perfiling</h3>
-                        <p class="text-foreground-600 max-w-md">Entendemos tu necesidad de compra o inversión y perfilamos el tipo de productor o fábrica requerida en el país.</p>
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-building-4-line text-4xl"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Zonas Francas y Manufactura</h3>
+                        <p class="text-foreground-600 max-w-md">Auditamos que talleres y plantas locales (médica, textil, electrónica) cumplan con tiempos de entrega, normas ISO de calidad y gestión de inventario antes del despacho de exportación.</p>
                     </div>
                     <div class="carousel-slide flex-col items-center justify-center">
-                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-filter-3-line text-4xl"></i></div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Paso 2: Filtrado y Selección</h3>
-                        <p class="text-foreground-600 max-w-md">Identificamos y filtramos proveedores y fabricantes reales con capacidad operativa demostrada.</p>
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-plant-line text-4xl"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Agroindustria y Alimentos</h3>
+                        <p class="text-foreground-600 max-w-md">Inspección en terreno para compradores internacionales: humedad del grano (cacao/café), empaque, pesaje, logística de acopio en Cibao y salida en puerto (Caucedo/Haina).</p>
                     </div>
                     <div class="carousel-slide flex-col items-center justify-center">
-                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-building-2-line text-4xl"></i></div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Paso 3: Auditoría en Terreno</h3>
-                        <p class="text-foreground-600 max-w-md">Inspección física de plantas, almacenes, licencias y reputación para evitar fraudes o empresas fantasma.</p>
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-leaf-line text-4xl"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Industria Tabacalera y Cigarros</h3>
+                        <p class="text-foreground-600 max-w-md">Te conectamos con suplidores de tabaco premium en Santiago y Cibao. Inspeccionamos el curado, rolling, calidad de la hoja y empaque para exportación.</p>
                     </div>
                     <div class="carousel-slide flex-col items-center justify-center">
-                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-handshake-line text-4xl"></i></div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Paso 4: Negociación y Contrato</h3>
-                        <p class="text-foreground-600 max-w-md">Negociamos directamente en moneda local para asegurar el costo real de mercado y eliminar sobrecostos para extranjeros.</p>
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-shirt-line text-4xl"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Confección Textil y Calzado</h3>
+                        <p class="text-foreground-600 max-w-md">Control de calidad en línea de producción: inspección de costuras, empaque, etiquetado (ticketing) y prevención de mermas o robos de tela en parques industriales.</p>
                     </div>
                     <div class="carousel-slide flex-col items-center justify-center">
-                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-ship-2-line text-4xl"></i></div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Paso 5: Inspección y Despacho</h3>
-                        <p class="text-foreground-600 max-w-md">Revisión técnica de lotes y muestras antes del pago final y coordinación con la logística local de exportación.</p>
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-flashlight-line text-4xl"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Construcción y Energía</h3>
+                        <p class="text-foreground-600 max-w-md">Inspección física de contenedores al llegar al puerto, verificación de recepción en almacenes y reporte fotográfico/auditoría del avance de obras e inventario en sitio.</p>
+                    </div>
+                    <div class="carousel-slide flex-col items-center justify-center">
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mb-6"><i class="ri-shake-hands-line text-4xl"></i></div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-foreground-950 mb-3 font-heading">Conexión Directa con Suplidores</h3>
+                        <p class="text-foreground-600 max-w-md">No somos un directorio. Negociamos precios locales, eliminamos el sobrecosto por ser extranjero y firmamos contratos garantizando la calidad antes del pago.</p>
                     </div>
                 </div>
 
@@ -1102,14 +1106,15 @@
                     <span class="carousel-dot w-3 h-3 rounded-full bg-background-300 cursor-pointer transition-all" onclick="showSlide(2)"></span>
                     <span class="carousel-dot w-3 h-3 rounded-full bg-background-300 cursor-pointer transition-all" onclick="showSlide(3)"></span>
                     <span class="carousel-dot w-3 h-3 rounded-full bg-background-300 cursor-pointer transition-all" onclick="showSlide(4)"></span>
+                    <span class="carousel-dot w-3 h-3 rounded-full bg-background-300 cursor-pointer transition-all" onclick="showSlide(5)"></span>
                 </div>
 
                 <div class="flex items-center justify-between mt-8">
                     <button onclick="prevSlide()" class="px-4 py-2 rounded-md text-sm font-semibold bg-background-200 text-foreground-700 hover:bg-background-300 transition-colors flex items-center gap-1">
                         <i class="ri-arrow-left-line"></i> Anterior
                     </button>
-                    <a href="https://api.whatsapp.com/send?phone=18094328712&text=Hola%2C%20quiero%20una%20consulta%20de%20Sourcing." target="_blank" class="px-6 py-2.5 rounded-md text-sm font-bold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors shadow-md">
-                        Agenda tu Consulta
+                    <a href="https://api.whatsapp.com/send?phone=18094328712&text=Hola%2C%20busco%20suplidores%20o%20auditoria%20operativa%20en%20RD." target="_blank" class="px-6 py-2.5 rounded-md text-sm font-bold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors shadow-md">
+                        Conectar con un Suplidor
                     </a>
                     <button onclick="nextSlide()" class="px-4 py-2 rounded-md text-sm font-semibold bg-background-200 text-foreground-700 hover:bg-background-300 transition-colors flex items-center gap-1">
                         Siguiente <i class="ri-arrow-right-line"></i>
