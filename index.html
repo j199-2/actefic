@@ -117,7 +117,7 @@ function changeLanguage(lang) {
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
-// --- VIEW SWITCHER (LOCAL / GLOBAL) ---
+// --- VIEW SWITCHER (LOCAL / GLOBAL) --- 
 function showGlobalView() {
   document.getElementById('view-local').classList.add('hidden');
   document.getElementById('view-global').classList.remove('hidden');
@@ -144,14 +144,23 @@ function scrollToSobreMi() {
 
 function toggleMenu() { document.getElementById('menu-movil').classList.toggle('hidden'); }
 
+// --- EXPERIENCE MODAL (LOCAL & GLOBAL) ---
 function openExperience() {
-  document.getElementById('experience-modal').classList.remove('hidden');
+  let isGlobal = !document.getElementById('view-global').classList.contains('hidden');
+  if(isGlobal) {
+    document.getElementById('experience-modal-global').classList.remove('hidden');
+    document.getElementById('experience-content-global').scrollTop = 0;
+    document.getElementById('exp-close-btn-global').classList.add('opacity-0','pointer-events-none');
+  } else {
+    document.getElementById('experience-modal-local').classList.remove('hidden');
+    document.getElementById('experience-content-local').scrollTop = 0;
+    document.getElementById('exp-close-btn-local').classList.add('opacity-0','pointer-events-none');
+  }
   document.body.style.overflow = 'hidden';
-  document.getElementById('experience-content').scrollTop = 0;
-  document.getElementById('exp-close-btn').classList.add('opacity-0','pointer-events-none');
 }
 function closeExperience() {
-  document.getElementById('experience-modal').classList.add('hidden');
+  document.getElementById('experience-modal-local').classList.add('hidden');
+  document.getElementById('experience-modal-global').classList.add('hidden');
   document.body.style.overflow = 'auto';
 }
 
@@ -182,9 +191,6 @@ function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // ============================================
-  // OBSERVADOR PARA EXPERIENCIA INMERSIVA (LOCAL Y GLOBAL)
-  // ============================================
   const expContentLocal = document.getElementById('experience-content-local');
   const expContentGlobal = document.getElementById('experience-content-global');
 
@@ -205,10 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   setupExpObserver(expContentLocal, 'exp-progress-bar-local', 'exp-close-btn-local');
   setupExpObserver(expContentGlobal, 'exp-progress-bar-global', 'exp-close-btn-global');
-
-  // ============================================
-  // SELECTOR DE SECTORES EN HERO
-  // ============================================
+  
   for (const key in sectorsData) {
     const option = document.createElement('option');
     option.value = key;
@@ -216,9 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('hero-sector-selector').appendChild(option);
   }
 
-  // ============================================
-  // FORMULARIO DE CONTACTO
-  // ============================================
   const contactForm = document.getElementById('contact-form');
   if(contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -244,33 +244,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ============================================
-  // AUTO-DETECT VISITOR LOCATION
-  // Outside Dominican Republic -> Global Services
-  // ============================================
-  fetch('https://ipapi.co/json/')
-    .then(r => r.json())
-    .then(data => {
-      if (data.country_code && data.country_code !== 'DO') {
-        showGlobalView();
-        const banner = document.createElement('div');
-        banner.id = 'geo-banner';
-        banner.className = 'fixed top-24 left-1/2 -translate-x-1/2 z-[90] max-w-md px-5 py-3 rounded-xl bg-primary-800 text-background-50 shadow-lg text-sm font-medium flex items-center gap-3 notranslate';
-        banner.setAttribute('translate', 'no');
-        banner.innerHTML = '<i class="ri-global-line text-lg text-accent-400"></i><span>We detected you\'re outside the Dominican Republic — showing Global Services.</span><button onclick="showLocalView(); document.getElementById(\'geo-banner\').remove();" class="ml-2 underline text-accent-400 hover:text-accent-300 whitespace-nowrap font-semibold">View Local RD</button><button onclick="document.getElementById(\'geo-banner\').remove();" class="ml-1 text-background-400 hover:text-background-200"><i class="ri-close-line"></i></button>';
-        document.body.appendChild(banner);
-        setTimeout(() => {
-          if (document.getElementById('geo-banner')) {
-            const b = document.getElementById('geo-banner');
-            b.style.transition = 'opacity 1s ease-out';
-            b.style.opacity = '0';
-            setTimeout(() => b.remove(), 1000);
-          }
-        }, 8000);
-      }
-    })
-    .catch(() => { /* Geolocation failed — stay on Local RD default */ });
-});
   // ============================================
   // AUTO-DETECT VISITOR LOCATION
   // Outside Dominican Republic -> Global Services
@@ -612,59 +585,6 @@ document.addEventListener('mouseleave', function(e) {
 });
 function closeExitPopup() { document.getElementById('exit-popup').classList.add('hidden'); }
 </script>
-</head>
-<body>
-<div id="google_translate_element" class="hidden"></div>
-<div id="root">
-  <main class="bg-background-50 text-foreground-900 min-h-screen font-body">
-    
-    <!-- HEADER -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background-50/95 backdrop-blur-md border-b border-background-200/70 shadow-none">
-      <div class="w-full px-6 md:px-10 lg:px-16">
-        <nav class="flex items-center justify-between h-20 relative">
-          <a href="#inicio" class="flex flex-col leading-tight">
-            <span class="text-2xl md:text-3xl font-extrabold tracking-tight font-heading notranslate" translate="no">
-              <span class="text-accent-500">A</span><span class="text-primary-500">c</span><span class="text-primary-500">t</span><span class="text-accent-500">E</span><span class="text-primary-500">f</span><span class="text-primary-500">i</span><span class="text-primary-500">c</span>
-            </span>
-            <span class="text-[10px] md:text-xs font-semibold tracking-[0.15em] uppercase text-foreground-700 notranslate" translate="no">Operative Consulting, Sourcing & Tech</span>
-          </a>
-          <div class="hidden md:flex items-center gap-8">
-            <button onclick="showLocalView(); window.location.hash='#inicio';" class="text-sm font-medium text-foreground-700 hover:text-primary-500 transition-colors whitespace-nowrap">Local RD</button>
-            <button onclick="showGlobalView(); window.location.hash='#global-inicio';" class="text-sm font-bold text-accent-600 hover:text-accent-700 transition-colors whitespace-nowrap flex items-center gap-1">
-              <i class="ri-global-line"></i> Global Services
-            </button>
-            <button onclick="scrollToSobreMi()" class="text-sm font-medium text-foreground-700 hover:text-primary-500 transition-colors whitespace-nowrap">Sobre Mí</button>
-            <a href="#contacto" class="text-sm font-medium text-foreground-700 hover:text-primary-500 transition-colors whitespace-nowrap">Contacto</a>
-            <div class="flex items-center gap-1 border-r border-background-200 pr-4 mr-2">
-              <button onclick="changeLanguage('es')" class="px-2 py-1 text-xs font-bold rounded text-foreground-600 hover:bg-background-200 transition-colors">ES</button>
-              <button onclick="changeLanguage('en')" class="px-2 py-1 text-xs font-bold rounded text-foreground-600 hover:bg-background-200 transition-colors">EN</button>
-              <button onclick="changeLanguage('zh-CN')" class="px-2 py-1 text-xs font-bold rounded text-foreground-600 hover:bg-background-200 transition-colors">中文</button>
-            </div>
-            <a href="https://api.whatsapp.com/send?phone=18094328712&text=mas%20informaci%C3%B6n%20(ACTEFIC)%20" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors whitespace-nowrap">
-              <i class="ri-whatsapp-line"></i>Hablemos
-            </a>
-          </div>
-          <button onclick="toggleMenu()" class="md:hidden w-10 h-10 flex items-center justify-center text-foreground-800" aria-label="Menú">
-            <i class="ri-menu-line text-2xl"></i>
-          </button>
-        </nav>
-        <div id="menu-movil" class="hidden md:hidden absolute top-20 left-0 right-0 bg-background-50 border-b border-background-200/70 flex-col items-center gap-4 py-6 shadow-lg">
-          <button onclick="toggleMenu(); showLocalView(); window.location.hash='#inicio';" class="text-sm font-medium text-foreground-700 hover:text-primary-500">Local RD Services</button>
-          <button onclick="toggleMenu(); showGlobalView(); window.location.hash='#global-inicio';" class="text-sm font-bold text-accent-600 hover:text-accent-700">Global Services</button>
-          <button onclick="toggleMenu(); scrollToSobreMi();" class="text-sm font-medium text-foreground-700 hover:text-primary-500">Sobre Mí</button>
-          <a href="#contacto" onclick="toggleMenu()" class="text-sm font-medium text-foreground-700 hover:text-primary-500">Contacto</a>
-          <div class="flex items-center gap-2 mt-4">
-            <button onclick="changeLanguage('es')" class="px-3 py-1.5 text-xs font-bold rounded bg-background-200 text-foreground-700">ES</button>
-            <button onclick="changeLanguage('en')" class="px-3 py-1.5 text-xs font-bold rounded bg-background-200 text-foreground-700">EN</button>
-            <button onclick="changeLanguage('zh-CN')" class="px-3 py-1.5 text-xs font-bold rounded bg-background-200 text-foreground-700">中文</button>
-          </div>
-          <a href="https://api.whatsapp.com/send?phone=18094328712&text=mas%20informaci%C3%B6n%20(ACTEFIC)%20" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold bg-accent-500 text-background-50 hover:bg-accent-600 transition-colors">
-            <i class="ri-whatsapp-line"></i>Hablemos
-          </a>
-        </div>
-      </div>
-    </header>
-
     <!-- ========================================== -->
     <!-- VISTA LOCAL (PIEDRA ANGULAR RD) -->
     <!-- ========================================== -->
