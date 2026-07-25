@@ -182,20 +182,33 @@ function nextSlide() { showSlide(currentSlide + 1); }
 function prevSlide() { showSlide(currentSlide - 1); }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const expContent = document.getElementById('experience-content');
-  if(expContent) {
-    expContent.addEventListener('scroll', function() {
-      let progress = (expContent.scrollTop / (expContent.scrollHeight - expContent.clientHeight)) * 100;
-      document.getElementById('exp-progress-bar').style.width = progress + '%';
-      if (progress > 85) document.getElementById('exp-close-btn').classList.remove('opacity-0','pointer-events-none');
-      else document.getElementById('exp-close-btn').classList.add('opacity-0','pointer-events-none');
-    });
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
-    }, { root: expContent, threshold: 0.3 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // ============================================
+  // OBSERVADOR PARA EXPERIENCIA INMERSIVA (LOCAL Y GLOBAL)
+  // ============================================
+  const expContentLocal = document.getElementById('experience-content-local');
+  const expContentGlobal = document.getElementById('experience-content-global');
+
+  function setupExpObserver(expContent, progressBarId, closeBtnId) {
+    if(expContent) {
+      expContent.addEventListener('scroll', function() {
+        let progress = (expContent.scrollTop / (expContent.scrollHeight - expContent.clientHeight)) * 100;
+        document.getElementById(progressBarId).style.width = progress + '%';
+        if (progress > 85) document.getElementById(closeBtnId).classList.remove('opacity-0','pointer-events-none');
+        else document.getElementById(closeBtnId).classList.add('opacity-0','pointer-events-none');
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+      }, { root: expContent, threshold: 0.3 });
+      expContent.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
   }
-  
+
+  setupExpObserver(expContentLocal, 'exp-progress-bar-local', 'exp-close-btn-local');
+  setupExpObserver(expContentGlobal, 'exp-progress-bar-global', 'exp-close-btn-global');
+
+  // ============================================
+  // SELECTOR DE SECTORES EN HERO
+  // ============================================
   for (const key in sectorsData) {
     const option = document.createElement('option');
     option.value = key;
@@ -203,6 +216,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('hero-sector-selector').appendChild(option);
   }
 
+  // ============================================
+  // FORMULARIO DE CONTACTO
+  // ============================================
   const contactForm = document.getElementById('contact-form');
   if(contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -228,6 +244,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // ============================================
+  // AUTO-DETECT VISITOR LOCATION
+  // Outside Dominican Republic -> Global Services
+  // ============================================
+  fetch('https://ipapi.co/json/')
+    .then(r => r.json())
+    .then(data => {
+      if (data.country_code && data.country_code !== 'DO') {
+        showGlobalView();
+        const banner = document.createElement('div');
+        banner.id = 'geo-banner';
+        banner.className = 'fixed top-24 left-1/2 -translate-x-1/2 z-[90] max-w-md px-5 py-3 rounded-xl bg-primary-800 text-background-50 shadow-lg text-sm font-medium flex items-center gap-3 notranslate';
+        banner.setAttribute('translate', 'no');
+        banner.innerHTML = '<i class="ri-global-line text-lg text-accent-400"></i><span>We detected you\'re outside the Dominican Republic — showing Global Services.</span><button onclick="showLocalView(); document.getElementById(\'geo-banner\').remove();" class="ml-2 underline text-accent-400 hover:text-accent-300 whitespace-nowrap font-semibold">View Local RD</button><button onclick="document.getElementById(\'geo-banner\').remove();" class="ml-1 text-background-400 hover:text-background-200"><i class="ri-close-line"></i></button>';
+        document.body.appendChild(banner);
+        setTimeout(() => {
+          if (document.getElementById('geo-banner')) {
+            const b = document.getElementById('geo-banner');
+            b.style.transition = 'opacity 1s ease-out';
+            b.style.opacity = '0';
+            setTimeout(() => b.remove(), 1000);
+          }
+        }, 8000);
+      }
+    })
+    .catch(() => { /* Geolocation failed — stay on Local RD default */ });
+});
   // ============================================
   // AUTO-DETECT VISITOR LOCATION
   // Outside Dominican Republic -> Global Services
